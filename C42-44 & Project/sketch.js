@@ -6,7 +6,7 @@ var track2;
 var traffic1, traffic2, traffic3, traffic4, traffic5, traffic6;
 var endimg;
 var button;
-var gameState = "START";
+var gameState = "LEVEL4";
 function preload() {
     traffic1 = loadImage("images/car1.png");
     traffic3 = loadImage("images/car3.png");
@@ -21,7 +21,10 @@ function preload() {
     buttonimg = loadImage("images/start.png");
     startscreen = loadImage("images/startscreen.jpg")
     track3img = loadImage("images/track3.png");
-    track4img = loadImage("images/track4.png")
+    track4img = loadImage("images/track4.png");
+    blackvanimg = loadImage("images/blackvan.png");
+    backgroundimg = loadImage("images/Finish.jpg");
+    thximg = loadImage("images/thx.png");
 
     trafficGroup = new Group();
     trafficGroup2 = new Group();
@@ -42,6 +45,10 @@ function setup() {
     police.addImage("polssdfd", policeimg);
     police.scale = 0.5;
     police.debug = true;
+
+    blackvan = createSprite(displayWidth / 2, -36638,100,100);
+    blackvan.addImage("hidkjbkrjfdb", blackvanimg);
+    blackvan.debug = true;
 
     fill("blue");
     button = createButton('Play');
@@ -68,7 +75,7 @@ function draw() {
     }
 
     if (gameState === "LEVEL1") {
-        spawnObstacles1();
+        // spawnObstacles1();
         button.hide();
         background(rgb(198, 135, 103));
         image(track1img, 0, -displayHeight * 4, displayWidth, displayHeight * 5);
@@ -101,7 +108,7 @@ function draw() {
     }
 
     if (gameState === "LEVEL2") {
-        spawnObstacles2();
+        // spawnObstacles2();
         button.hide();
         // robber.y = displayHeight - 500;
         // police.y = displayHeight - 10;
@@ -140,7 +147,7 @@ function draw() {
     }
 
     if (gameState === "LEVEL3") {
-        spawnObstacles3();
+        // spawnObstacles3();
         button.hide();
         // robber.y = displayHeight - 500;
         // police.y = displayHeight - 10;
@@ -191,11 +198,11 @@ function draw() {
 
 
         if (keyDown("right") && robber.x < 1580) {
-            robber.x = robber.x + 6;
+            robber.x = robber.x + 35;
         }
 
         if (keyDown("left") && robber.x > 360) {
-            robber.x = robber.x - 6;
+            robber.x = robber.x - 35;
         }
 
         if (keyDown("down")) {
@@ -210,16 +217,21 @@ function draw() {
             gameState = "END";
         }
 
-
-        if (robber.y < -36638) {
-            gameState = "FINISH";
+        if(robber.y = blackvan){
+            gameState = "FINISH"
         }
-
 
         drawSprites();
     }
 
+
+    if(gameState === "FINISH"){
+        background(thximg);
+
+    }
+
     if (gameState === "END") {
+        console.log("EEEEEEEEENNNNNNNNDDDDDD")
         background(endimg);
         fill("red");
         textSize(50);
@@ -320,6 +332,7 @@ function spawnObstacles3() {
 function spawnObstacles4() {
 
     if (frameCount % 60 === 0) {
+        console.log("IT IS SPAWING")
         var traffic44 = createSprite(0, -36638, 10, 25);
         traffic44.x = Math.round(random(360, 1580));
         var rand = Math.round(random(1, 5));
@@ -338,7 +351,7 @@ function spawnObstacles4() {
             default: break;
         }
 
-        traffic44.velocityY = +15;
+        traffic44.velocityY = +30;
         traffic44.scale = 0.5;
         traffic44.lifetime = 300;
         trafficGroup4.add(traffic44);
