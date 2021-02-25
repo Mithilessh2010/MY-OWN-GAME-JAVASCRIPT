@@ -46,9 +46,8 @@ function setup() {
     police.scale = 0.5;
     police.debug = true;
 
-    blackvan = createSprite(displayWidth / 2, -36638,100,100);
+    blackvan = createSprite(displayWidth / 2, -36638, 100, 100);
     blackvan.addImage("hidkjbkrjfdb", blackvanimg);
-    blackvan.debug = true;
 
     fill("blue");
     button = createButton('Play');
@@ -75,7 +74,7 @@ function draw() {
     }
 
     if (gameState === "LEVEL1") {
-        // spawnObstacles1();
+        spawnObstacles1();
         button.hide();
         background(rgb(198, 135, 103));
         image(track1img, 0, -displayHeight * 4, displayWidth, displayHeight * 5);
@@ -108,7 +107,7 @@ function draw() {
     }
 
     if (gameState === "LEVEL2") {
-        // spawnObstacles2();
+        spawnObstacles2();
         button.hide();
         // robber.y = displayHeight - 500;
         // police.y = displayHeight - 10;
@@ -131,7 +130,7 @@ function draw() {
         }
 
         if (keyDown("up")) {
-            robber.y = robber.y - 6 ;
+            robber.y = robber.y - 6;
         }
 
         if (trafficGroup2.isTouching(robber) || police.isTouching(robber) || robber.y === police.y) {
@@ -147,7 +146,7 @@ function draw() {
     }
 
     if (gameState === "LEVEL3") {
-        // spawnObstacles3();
+        spawnObstacles3();
         button.hide();
         // robber.y = displayHeight - 500;
         // police.y = displayHeight - 10;
@@ -212,22 +211,19 @@ function draw() {
         if (keyDown("up")) {
             robber.y = robber.y - 6;
         }
+        if (robber.y = blackvan.y) {
+            gameState = "FINISH"
+        }
 
         if (trafficGroup4.isTouching(robber) || police.isTouching(robber) || robber.y === police.y) {
             gameState = "END";
         }
-
-        if(robber.y = blackvan){
-            gameState = "FINISH"
-        }
-
         drawSprites();
     }
 
 
-    if(gameState === "FINISH"){
+    if (gameState === "FINISH") {
         background(thximg);
-
     }
 
     if (gameState === "END") {
@@ -300,7 +296,7 @@ function spawnObstacles2() {
 }
 
 function spawnObstacles3() {
-    
+
     if (frameCount % 60 === 0) {
         var traffic33 = createSprite(0, -17216, 10, 25);
         traffic33.x = Math.round(random(360, 1580));
