@@ -6,7 +6,7 @@ var track2;
 var traffic1, traffic2, traffic3, traffic4, traffic5, traffic6;
 var endimg;
 var button;
-var gameState = "LEVEL4";
+var gameState = "START";
 function preload() {
     traffic1 = loadImage("images/car1.png");
     traffic3 = loadImage("images/car3.png");
@@ -96,7 +96,7 @@ function draw() {
         if (keyDown("up")) {
             robber.y = robber.y - 6;
         }
-        if (trafficGroup.isTouching(robber) || police.isTouching(robber) || robber.y === police.y) {
+        if (trafficGroup.isTouching(robber) || police.isTouching(robber) || robber.y > police.y) {
             gameState = "END";
         }
 
@@ -133,7 +133,7 @@ function draw() {
             robber.y = robber.y - 6;
         }
 
-        if (trafficGroup2.isTouching(robber) || police.isTouching(robber) || robber.y === police.y) {
+        if (trafficGroup2.isTouching(robber) || police.isTouching(robber) || robber.y > police.y) {
             gameState = "END";
         }
 
@@ -173,7 +173,7 @@ function draw() {
             robber.y = robber.y - 6;
         }
 
-        if (trafficGroup3.isTouching(robber) || police.isTouching(robber) || robber.y === police.y) {
+        if (trafficGroup3.isTouching(robber) || police.isTouching(robber) || robber.y > police.y) {
             gameState = "END";
         }
 
@@ -211,11 +211,11 @@ function draw() {
         if (keyDown("up")) {
             robber.y = robber.y - 6;
         }
-        if (robber.y = blackvan.y) {
+        if (robber.y == blackvan.y) {
             gameState = "FINISH"
         }
 
-        if (trafficGroup4.isTouching(robber) || police.isTouching(robber) || robber.y === police.y) {
+        if (trafficGroup4.isTouching(robber) || police.isTouching(robber) || robber.y > police.y) {
             gameState = "END";
         }
         drawSprites();
@@ -229,7 +229,7 @@ function draw() {
     if (gameState === "END") {
         console.log("EEEEEEEEENNNNNNNNDDDDDD")
         background(endimg);
-        fill("red");
+        fill("white");
         textSize(50);
         text("You have been Captured!!!!!!! \n GAME OVER \n Press ctrl + r to restart", displayWidth / 2, displayHeight / 2 - 100);
 
